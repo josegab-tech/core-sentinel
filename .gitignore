@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches e arquivos temporários do Python
+.pytest_cache/
+*.log
+
+# VS Code / IDEs
+.vscode/
+.idea/
+
+# Dados locais do Docker / Volumes
+pgdata/
+
+# Arquivos de ambiente local
+.env

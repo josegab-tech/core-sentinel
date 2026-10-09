@@ -1,0 +1,43 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: coresentinel_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app_server
+    networks:
+      - core_sentinel_net
+
+  app_server:
+    build: ./app
+    container_name: coresentinel_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db_postgres
+    depends_on:
+      - db_postgres
+    networks:
+      - core_sentinel_net
+
+  db_postgres:
+    image: postgres:15-alpine
+    container_name: coresentinel_db
+    environment:
+      POSTGRES_USER: sentinel_user
+      POSTGRES_PASSWORD: sentinel_password
+      POSTGRES_DB: sentinel_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - core_sentinel_net
+
+networks:
+  core_sentinel_net:
+    driver: bridge
+
+volumes:
+  pgdata:
