@@ -31,21 +31,22 @@ O tráfego de entrada é centralizado no Nginx, garantindo que os componentes in
 └──────────────────────────────────────────────────────────┘
 ```
 ## Componentes do Ecossistema
-Nginx (Reverse Proxy): Atua como Ponto Único de Entrada (Single Point of Entry), escondendo a arquitetura interna e realizando a ponte de comunicação na porta 80.
+* Nginx (Reverse Proxy):
+Atua como Ponto Único de Entrada (Single Point of Entry), escondendo a arquitetura interna e realizando a ponte de comunicação na porta 80.
 
-### FastAPI (Service Application): 
-Aplicação backend que processa requisições de negócio e expõe rotas de auditoria e de erro simular (/error) para validação de fluxos de exceção.
+* FastAPI (Service Application): 
+Aplicação backend que processa requisições de negócio e expõe rotas de auditoria e de erro simulado (/error) para validação de fluxos de exceção.
 
-### PostgreSQL (Persistence Layer): 
+* PostgreSQL (Persistence Layer): 
 Banco de dados relacional isolado sem exposição pública de portas.
 
-## Suite de Scripts de Sustentação:
+## Suíte de Scripts de Sustentação:
 
-### check_health.sh: 
+### `check_health.sh`: 
 Realiza a sondagem de integridade dos containers Docker em tempo real e inspeciona códigos de resposta HTTP.
 
-### log_analyzer.py: 
-Parser automatizado de logs para isolamento rápido do tempo médio de reparo (MTTR) e filtragem de falhas críticas 500 ERROR.
+### `log_analyzer.py`: 
+Parser automatizado de logs para isolamento rápido do tempo médio de reparo (MTTR) e filtragem de falhas críticas `500 ERROR`.
 
 ## Guia de Operação (Runbook de Implantação)
 
